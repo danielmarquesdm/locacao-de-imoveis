@@ -4,7 +4,6 @@ import edu.ifma.locacaodeimoveis.builder.AluguelBuilder;
 import edu.ifma.locacaodeimoveis.model.Aluguel;
 import edu.ifma.locacaodeimoveis.util.EMFactory;
 import edu.ifma.locacaodeimoveis.util.exception.LocacaoException;
-import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
