@@ -17,7 +17,7 @@ public class ClienteBuilder {
         builder.cliente.setDtNascimento(LocalDate.of(2000, 12, 1));
         builder.cliente.setCpf("123.123.123-12");
         builder.cliente.setEmail("akila@email.com");
-        builder.cliente.setCelular(986554653);
+        builder.cliente.setCelular("986554653");
 
         return builder;
     }

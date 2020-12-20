@@ -13,7 +13,7 @@ public class AluguelBuilder {
     }
 
     public static AluguelBuilder umAluguel() {
-        Locacao locacao = LocacaoBuilder.umaLocacao().constroi();
+        Locacao locacao = LocacaoBuilder.umaLocacao().comId(3L).constroi();
         AluguelBuilder builder = new AluguelBuilder();
         builder.aluguel = new Aluguel();
         builder.aluguel.setDataDeVencimento(LocalDate.of(2020, 12, 10));

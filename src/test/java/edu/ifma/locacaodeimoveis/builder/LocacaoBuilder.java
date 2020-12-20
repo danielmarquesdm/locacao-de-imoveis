@@ -15,8 +15,8 @@ public class LocacaoBuilder {
 
     public static LocacaoBuilder umaLocacao() {
         LocacaoBuilder builder = new LocacaoBuilder();
-        Cliente cliente = ClienteBuilder.umCliente().constroi();
-        Imovel imovel = ImovelBuilder.umImovel().constroi();
+        Cliente cliente = ClienteBuilder.umCliente().comId(1L).constroi();
+        Imovel imovel = ImovelBuilder.umImovel().comId(2L).constroi();
         builder.locacao = new Locacao(imovel, cliente);
         builder.locacao.setValorAluguel(BigDecimal.valueOf(500));
         builder.locacao.setPercentualMulta(0);

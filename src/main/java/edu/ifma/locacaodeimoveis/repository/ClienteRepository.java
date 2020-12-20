@@ -1,31 +1,13 @@
 package edu.ifma.locacaodeimoveis.repository;
 
 import edu.ifma.locacaodeimoveis.model.Cliente;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-import javax.persistence.EntityManager;
+import java.util.List;
 
-public class ClienteRepository {
-
-    private final EntityManager manager;
-    private final DAOGenerico<Cliente> daoGenerico;
-
-    public ClienteRepository(EntityManager manager) {
-        this.manager = manager;
-        this.daoGenerico = new DAOGenerico<>(manager);
-    }
-
-    public Cliente buscaPor(String nome) {
-        return manager.createQuery("From Cliente c where c.nomeCliente = :nome", Cliente.class)
-                .setParameter("nome", nome)
-                .getSingleResult();
-    }
-
-    public Cliente salvaOuAtualiza(Cliente cliente) {
-        return daoGenerico.salvaOuAtualiza(cliente);
-    }
-
-    public void remove(Cliente cliente) {
-        daoGenerico.remove(cliente);
-    }
-
+public interface ClienteRepository extends JpaRepository<Cliente, Long> {
+    @Query(value = "From Cliente")
+    List<Cliente> todos(Sort sort);
 }

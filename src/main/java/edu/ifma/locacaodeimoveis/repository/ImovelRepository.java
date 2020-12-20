@@ -1,30 +1,13 @@
 package edu.ifma.locacaodeimoveis.repository;
 
 import edu.ifma.locacaodeimoveis.model.Imovel;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-import javax.persistence.EntityManager;
+import java.util.List;
 
-public class ImovelRepository {
-    private final EntityManager manager;
-    private final DAOGenerico<Imovel> daoGenerico;
-
-    public ImovelRepository(EntityManager manager) {
-        this.manager = manager;
-        this.daoGenerico = new DAOGenerico<>(manager);
-    }
-
-    public Imovel buscaPor(String nome) {
-        return manager.createQuery("From Imovel i where i.nome = :nome", Imovel.class)
-                .setParameter("nome", nome)
-                .getSingleResult();
-    }
-
-    public Imovel salvaOuAtualiza(Imovel imovel) {
-        return daoGenerico.salvaOuAtualiza(imovel);
-    }
-
-    public void remove(Imovel imovel) {
-        daoGenerico.remove(imovel);
-    }
-
+public interface ImovelRepository extends JpaRepository<Imovel, Long> {
+    @Query(value = "From Imovel")
+    List<Imovel> todos(Sort sort);
 }
