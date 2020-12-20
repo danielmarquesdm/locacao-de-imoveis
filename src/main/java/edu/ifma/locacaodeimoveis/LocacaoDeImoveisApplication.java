@@ -1,4 +1,4 @@
-package com.ifma.locacaodeimoveis;
+package edu.ifma.locacaodeimoveis;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
