@@ -16,7 +16,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.Matchers.arrayContainingInAnyOrder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AluguelRepositoryTest {
     private static EMFactory factory;
@@ -106,7 +108,7 @@ public class AluguelRepositoryTest {
 
         List<Aluguel> alugueisAtuais = aluguelRepository.buscaAlugueisPagosPor("Daniel");
         System.out.println("ALUGUEIS ATUAIS: " + alugueisAtuais);
-        Matchers.arrayContainingInAnyOrder(alugueisEsperados).matches(alugueisAtuais);
+        arrayContainingInAnyOrder(alugueisEsperados).matches(alugueisAtuais);
     }
 
     @Test
@@ -142,7 +144,7 @@ public class AluguelRepositoryTest {
 
         List<Aluguel> alugueisAtuais = aluguelRepository.buscaAlugueisEmAtraso(dataVencimento);
         assertEquals(2, alugueisAtuais.size());
-        Matchers.arrayContainingInAnyOrder(alugueisEsperados).matches(alugueisAtuais);
+        arrayContainingInAnyOrder(alugueisEsperados).matches(alugueisAtuais);
     }
 
     @Test

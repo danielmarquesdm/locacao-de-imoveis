@@ -4,13 +4,11 @@ import edu.ifma.locacaodeimoveis.builder.LocacaoBuilder;
 import edu.ifma.locacaodeimoveis.model.Imovel;
 import edu.ifma.locacaodeimoveis.model.Locacao;
 import edu.ifma.locacaodeimoveis.util.EMFactory;
-import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.mockito.Matchers;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
@@ -18,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.Matchers.arrayContainingInAnyOrder;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LocacaoRepositoryTest {
@@ -118,7 +116,7 @@ public class LocacaoRepositoryTest {
 
         List<Imovel> imoveisAtuais = locacaoRepository.buscaImoveisPor("Araçagy");
         assertNotNull(imoveisAtuais);
-        Matchers.arrayContainingInAnyOrder(imoveisEsperados).matches(imoveisAtuais);
+        arrayContainingInAnyOrder(imoveisEsperados).matches(imoveisAtuais);
     }
 
     @Test
@@ -145,6 +143,6 @@ public class LocacaoRepositoryTest {
 
         List<Imovel> imoveisAtuais = locacaoRepository.buscaImoveisDisponiveisPor(BigDecimal.valueOf(1500));
         assertNotNull(imoveisAtuais);
-        Matchers.arrayContainingInAnyOrder(imoveisEsperados).matches(imoveisAtuais);
+        arrayContainingInAnyOrder(imoveisEsperados).matches(imoveisAtuais);
     }
 }

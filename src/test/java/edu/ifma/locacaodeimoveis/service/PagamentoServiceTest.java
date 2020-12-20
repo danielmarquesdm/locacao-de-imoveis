@@ -38,8 +38,8 @@ public class PagamentoServiceTest {
         Aluguel aluguel = AluguelBuilder.umAluguel()
                 .comValorAluguel(BigDecimal.valueOf(1350))
                 .comPagamentoNoValorDe(BigDecimal.valueOf(1350))
-                .comDataDeVencimento(LocalDate.of(2020,12,10))
-                .comDataDePagamento(LocalDate.of(2020,12,10))
+                .comDataDeVencimento(LocalDate.of(2020, 12, 10))
+                .comDataDePagamento(LocalDate.of(2020, 12, 10))
                 .constroi();
         BigDecimal valorPagamento = pagamentoService.paga(aluguel.getLocacao().getValorAluguel(), aluguel);
         assertEquals(aluguel.getValorPago(), valorPagamento);
@@ -50,8 +50,8 @@ public class PagamentoServiceTest {
         Aluguel aluguel = AluguelBuilder.umAluguel()
                 .comValorAluguel(BigDecimal.valueOf(1350))
                 .comPagamentoNoValorDe(BigDecimal.valueOf(1350))
-                .comDataDeVencimento(LocalDate.of(2020,12,10))
-                .comDataDePagamento(LocalDate.of(2020,12,15))
+                .comDataDeVencimento(LocalDate.of(2020, 12, 10))
+                .comDataDePagamento(LocalDate.of(2020, 12, 15))
                 .constroi();
 
         BigDecimal multa = BigDecimal.valueOf(5 * 0.33);
