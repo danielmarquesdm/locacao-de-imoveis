@@ -18,7 +18,6 @@ public class Aluguel implements Serializable {
 
     @ManyToOne
     private Locacao locacao;
-
     @NotEmpty(message = "A data de vencimento deve ser preenchida")
     private LocalDate dataDeVencimento;
     @NotEmpty(message = "O valor pago deve ser preenchido")

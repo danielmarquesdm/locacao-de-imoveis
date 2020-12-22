@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>edu.ifma</groupId>
 	<artifactId>locacao-de-imoveis</artifactId>
-	<version>0.1.5</version>
+	<version>0.1.6</version>
 	<name>locacao-de-imoveis</name>
 	<description>Demo project for Spring Boot</description>
 

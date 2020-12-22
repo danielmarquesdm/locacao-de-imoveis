@@ -1,6 +1,7 @@
 package edu.ifma.locacaodeimoveis.repository;
 
 import edu.ifma.locacaodeimoveis.builder.ImovelBuilder;
+import edu.ifma.locacaodeimoveis.model.Cliente;
 import edu.ifma.locacaodeimoveis.model.Imovel;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import javax.validation.ConstraintViolationException;
 
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -32,7 +37,6 @@ public class CadastroImovelTest {
     @Test
     public void saveComNomeNuloDeveLancaException() {
         when(imovelRepository.save(any())).thenThrow(ConstraintViolationException.class);
-
         ConstraintViolationException exception = Assertions
                 .assertThrows(ConstraintViolationException.class,
                         () -> {
@@ -46,7 +50,6 @@ public class CadastroImovelTest {
     @Test
     public void saveComEnderecoNuloDeveLancaException() {
         when(imovelRepository.save(any())).thenThrow(ConstraintViolationException.class);
-
         ConstraintViolationException exception = Assertions
                 .assertThrows(ConstraintViolationException.class,
                         () -> {
@@ -60,7 +63,6 @@ public class CadastroImovelTest {
     @Test
     public void saveComBairroNuloDeveLancaException() {
         when(imovelRepository.save(any())).thenThrow(ConstraintViolationException.class);
-
         ConstraintViolationException exception = Assertions
                 .assertThrows(ConstraintViolationException.class,
                         () -> {
@@ -69,5 +71,21 @@ public class CadastroImovelTest {
                         },
                         "Deveria Lancar ConstraintViolationException");
         Assertions.assertNotNull(exception);
+    }
+
+    @Test
+    public void deveSalvarImovel() {
+        when(imovelRepository.save(any())).thenReturn(imovel);
+        Imovel imovelSalvo = imovelRepository.save(imovel);
+        assertNotNull(imovelSalvo);
+    }
+
+    @Test
+    public void deveRemoverImovel() {
+        when(imovelRepository.save(any())).thenReturn(imovel);
+        Imovel imovelSalvo = imovelRepository.save(imovel);
+        imovelRepository.deleteById(imovelSalvo.getIdImovel());
+        Optional<Imovel> byId = imovelRepository.findById(imovelSalvo.getIdImovel());
+        assertFalse(byId.isPresent());
     }
 }

@@ -1,6 +1,7 @@
 package edu.ifma.locacaodeimoveis.repository;
 
 import edu.ifma.locacaodeimoveis.builder.ClienteBuilder;
+import edu.ifma.locacaodeimoveis.model.Aluguel;
 import edu.ifma.locacaodeimoveis.model.Cliente;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import javax.validation.ConstraintViolationException;
 
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -32,7 +37,6 @@ public class CadastroClienteTest {
     @Test
     public void saveComNomeNuloDeveLancarExcecao() {
         when(clienteRepository.save(any())).thenThrow(ConstraintViolationException.class);
-
         ConstraintViolationException exception = Assertions
                 .assertThrows(ConstraintViolationException.class,
                         () -> {
@@ -46,7 +50,6 @@ public class CadastroClienteTest {
     @Test
     public void saveComCpfNuloDeveLancarExcecao() {
         when(clienteRepository.save(any())).thenThrow(ConstraintViolationException.class);
-
         ConstraintViolationException exception = Assertions
                 .assertThrows(ConstraintViolationException.class,
                         () -> {
@@ -60,7 +63,6 @@ public class CadastroClienteTest {
     @Test
     public void saveComCelularNuloDeveLancarExcecao() {
         when(clienteRepository.save(any())).thenThrow(ConstraintViolationException.class);
-
         ConstraintViolationException exception = Assertions
                 .assertThrows(ConstraintViolationException.class,
                         () -> {
@@ -74,7 +76,6 @@ public class CadastroClienteTest {
     @Test
     public void saveComEmailNuloDeveLancarExcecao() {
         when(clienteRepository.save(any())).thenThrow(ConstraintViolationException.class);
-
         ConstraintViolationException exception = Assertions
                 .assertThrows(ConstraintViolationException.class,
                         () -> {
@@ -84,10 +85,10 @@ public class CadastroClienteTest {
                         "Deveria Lancar ConstraintViolationException");
         Assertions.assertNotNull(exception);
     }
+
     @Test
     public void saveComDtNascimentoNuloDeveLancarExcecao() {
         when(clienteRepository.save(any())).thenThrow(ConstraintViolationException.class);
-
         ConstraintViolationException exception = Assertions
                 .assertThrows(ConstraintViolationException.class,
                         () -> {
@@ -96,5 +97,21 @@ public class CadastroClienteTest {
                         },
                         "Deveria Lancar ConstraintViolationException");
         Assertions.assertNotNull(exception);
+    }
+
+    @Test
+    public void deveSalvarCliente() {
+        when(clienteRepository.save(any())).thenReturn(cliente);
+        Cliente clienteSalvo = clienteRepository.save(cliente);
+        assertNotNull(clienteSalvo);
+    }
+
+    @Test
+    public void deveRemoverCliente() {
+        when(clienteRepository.save(any())).thenReturn(cliente);
+        Cliente clienteSalvo = clienteRepository.save(cliente);
+        clienteRepository.deleteById(clienteSalvo.getIdCliente());
+        Optional<Cliente> byId = clienteRepository.findById(clienteSalvo.getIdCliente());
+        assertFalse(byId.isPresent());
     }
 }

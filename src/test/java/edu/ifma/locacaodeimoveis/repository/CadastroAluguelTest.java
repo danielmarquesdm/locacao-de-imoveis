@@ -11,11 +11,12 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import javax.validation.ConstraintViolationException;
-
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -36,40 +37,52 @@ public class CadastroAluguelTest {
     @Test
     public void saveComDataDeVencimentoNulaDeveLancaException() {
         when(aluguelRepository.save(any())).thenThrow(ConstraintViolationException.class);
-
         ConstraintViolationException exception = assertThrows(ConstraintViolationException.class,
-                        () -> {
-                            aluguel.setDataDeVencimento(null);
-                            aluguelRepository.save(aluguel);
-                        },
-                        "Deveria Lancar ConstraintViolationException");
+                () -> {
+                    aluguel.setDataDeVencimento(null);
+                    aluguelRepository.save(aluguel);
+                },
+                "Deveria Lancar ConstraintViolationException");
         assertNotNull(exception);
     }
 
     @Test
     public void saveComValorPagoNuloDeveLancaException() {
         when(aluguelRepository.save(any())).thenThrow(ConstraintViolationException.class);
-
         ConstraintViolationException exception = assertThrows(ConstraintViolationException.class,
-                        () -> {
-                            aluguel.setValorPago(null);
-                            aluguelRepository.save(aluguel);
-                        },
-                        "Deveria Lancar ConstraintViolationException");
+                () -> {
+                    aluguel.setValorPago(null);
+                    aluguelRepository.save(aluguel);
+                },
+                "Deveria Lancar ConstraintViolationException");
         assertNotNull(exception);
     }
 
     @Test
     public void saveComDataDePagamentoNuloDeveLancaException() {
         when(aluguelRepository.save(any())).thenThrow(ConstraintViolationException.class);
-
         ConstraintViolationException exception = assertThrows(ConstraintViolationException.class,
-                        () -> {
-                            aluguel.setDataDePagamento(null);
-                            aluguelRepository.save(aluguel);
-                        },
-                        "Deveria Lancar ConstraintViolationException");
+                () -> {
+                    aluguel.setDataDePagamento(null);
+                    aluguelRepository.save(aluguel);
+                },
+                "Deveria Lancar ConstraintViolationException");
         assertNotNull(exception);
     }
 
+    @Test
+    public void deveSalvarAluguel() {
+        when(aluguelRepository.save(any())).thenReturn(aluguel);
+        Aluguel aluguelSalvo = aluguelRepository.save(aluguel);
+        assertNotNull(aluguelSalvo);
+    }
+
+    @Test
+    public void deveRemoverAluguel() {
+        when(aluguelRepository.save(any())).thenReturn(aluguel);
+        Aluguel aluguelSalvo = aluguelRepository.save(aluguel);
+        aluguelRepository.deleteById(aluguelSalvo.getIdAluguel());
+        Optional<Aluguel> byId = aluguelRepository.findById(aluguelSalvo.getIdAluguel());
+        assertFalse(byId.isPresent());
+    }
 }
