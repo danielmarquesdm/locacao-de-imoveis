@@ -17,4 +17,9 @@ public interface AluguelRepository extends JpaRepository<Aluguel, Long> {
 
     @Query(value = "From Aluguel a where a.dataDeVencimento = :dataDeVencimento")
     List<Aluguel> findBy(@Param("dataDeVencimento") LocalDate dataDeVencimento);
+
+    @Query(value = "SELECT a FROM Aluguel a INNER JOIN Locacao l ON a.locacao.id = l.id INNER JOIN Cliente c ON l.inquilino.id = c.id WHERE a.dataDePagamento > a.dataDeVencimento")
+    List<Aluguel> emAtraso();
+
+    void salvaOuAtualiza(Aluguel aluguel1);
 }

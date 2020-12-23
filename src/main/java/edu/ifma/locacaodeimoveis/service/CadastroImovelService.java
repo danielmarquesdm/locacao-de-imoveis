@@ -3,9 +3,11 @@ package edu.ifma.locacaodeimoveis.service;
 import edu.ifma.locacaodeimoveis.model.Imovel;
 import edu.ifma.locacaodeimoveis.repository.ImovelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CadastroImovelService {
     @Autowired
     private ImovelRepository imovelRepository;
